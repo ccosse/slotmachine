@@ -1,10 +1,10 @@
 <template>
   <div class="stage flex row justify-center q-my-sm">
-    <ReelComponent :reelIdx="0"/>
-    <ReelComponent :reelIdx="1"/>
-    <ReelComponent :reelIdx="2"/>
-    <ReelComponent :reelIdx="3"/>
-    <ReelComponent :reelIdx="4"/>
+    <ReelComponent :reelIdx="0" :reelid="'reel0'" />
+    <ReelComponent :reelIdx="1" :reelid="'reel1'" />
+    <ReelComponent :reelIdx="2" :reelid="'reel2'" />
+    <ReelComponent :reelIdx="3" :reelid="'reel3'" />
+    <ReelComponent :reelIdx="4" :reelid="'reel4'" />
     <!--
     -->
   </div>
@@ -26,5 +26,5 @@ export default defineComponent({
 })
 </script>
 <style>
-.stage {width:80vw;height:45vw;background-color:red;overflow:hidden;}
+.stage {width:80vw;height:45vw;background-color:red;}
 </style>

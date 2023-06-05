@@ -28,7 +28,11 @@ export default defineComponent({
     stop(){
       console.log('Stop')
       this.spinning = false
-      d3.selectAll(".reel").classed("spinning", this.spinning)
+      d3.select("#reel0").classed("spinning", this.spinning)
+      d3.select("#reel1").classed("spinning", this.spinning)
+      d3.select("#reel2").classed("spinning", this.spinning)
+      d3.select("#reel3").classed("spinning", this.spinning)
+      d3.select("#reel4").classed("spinning", this.spinning)
     }
   }
 })

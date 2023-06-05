@@ -1,6 +1,6 @@
 <template>
   <div class="reel_container">
-    <div class="reel">
+    <div v-bind:id="this.reelid" class="reel">
       <figure v-for="(val,idx) in this.tileImgs" :key="idx">
         <TileComponent :imgUrl="this.tileImgs[idx]" />
         <span class="hidden">{{val}}</span>
@@ -36,8 +36,8 @@ const reelImgs = [
 export default defineComponent({
   name: 'ReelComponent',
   components: { TileComponent },
-  props: [ 'reelIdx' ],
-  setup(){
+  props: [ 'reelIdx', 'reelid' ],
+  setup(props){
     return {
       tileImgs: ref([])
     }
@@ -68,8 +68,8 @@ export default defineComponent({
 }
 
 .reel_container {
-	width: 1px;
-	height: 1px;
+	width: 20px;
+	height: 10px;
 	position: relative;
 	margin: 0 auto 0px;
 	border: 1px solid #FFFF;
