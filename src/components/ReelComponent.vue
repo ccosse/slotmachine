@@ -2,15 +2,18 @@
   <div class="reel_container">
     <div v-bind:id="this.reelid" class="reel">
       <div v-for="(val,idx) in this.tileImgs" :key="idx" class="pane">
-        <!--TileComponent :imgUrl="this.tileImgs[idx]" /-->
+        <TileComponent :imgUrl="this.tileImgs[idx]" />
         <span class="hidden">{{val}}</span>
+        <!--
+        <img src="https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/cherries.png" style="opacity:0.5;width:100px;height:100px;transform:rotateZ(90deg)">
+        -->
       </div>
     </div>
   </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue'
-// import TileComponent from 'components/TileComponent.vue'
+import TileComponent from 'components/TileComponent.vue'
 const reelImgs = [
   'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/cherries.png',
   'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/pineapple.png',
@@ -35,7 +38,7 @@ const reelImgs = [
 ]
 export default defineComponent({
   name: 'ReelComponent',
-  // components: { TileComponent },
+  components: { TileComponent },
   props: [ 'reelIdx', 'reelid' ],
   setup(props){
     return {
