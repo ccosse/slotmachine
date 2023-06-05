@@ -51,11 +51,6 @@ export default defineComponent({
 })
 </script>
 <style>
-    #stage {
-      width: 100%;
-      height: 700px;
-      background-color: #bbddbb;
-    }
     .reel_container {
       width: 20px;
       height: 10px;
@@ -185,7 +180,7 @@ export default defineComponent({
       transform: rotateY(342deg) translateZ(315px);
     }
 
-    .reel {
+    .reel.paused {
       animation: spinY 5s infinite normal linear both paused;
     }
     .reel.spinning {

@@ -7,6 +7,7 @@
     <ReelComponent :reelIdx="4" :reelid="'reel4'" :reelcontainerid="'reelcontainer4'"/>
     <!--
     -->
+    <hline id="h2"/>
   </div>
 </template>
 <script>
@@ -26,4 +27,16 @@ export default defineComponent({
 })
 </script>
 <style>
+#stage {
+  width: 100%;
+  height: 700px;
+  background-color: #bbddbb;
+}
+#h2 {
+  position: absolute;
+  top: 350px;
+  background-color: red;
+  width:100%;
+  height:1px;
+}
 </style>
