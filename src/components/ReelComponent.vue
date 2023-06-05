@@ -77,7 +77,7 @@ export default defineComponent({
       -o-transform-style: preserve-3d;
       transform-style: preserve-3d;
     }
-    .reel div {
+    .reel .pane {
       position: absolute;
       width: 100px;
       height: 100px;
@@ -89,83 +89,83 @@ export default defineComponent({
       -o-transform-style: preserve-3d;
       transform-style: preserve-3d;
     }
-    .reel div:nth-child(1) {
+    .reel .pane:nth-child(1) {
       border: 1px solid #f00;
       transform: rotateY(0deg) translateZ(315px);
     }
-    .reel div:nth-child(2) {
+    .reel .pane:nth-child(2) {
       border: 1px solid #0f0;
       transform: rotateY(18deg) translateZ(315px);
     }
-    .reel div:nth-child(3) {
+    .reel .pane:nth-child(3) {
       border: 1px solid #00f;
       transform: rotateY(36deg) translateZ(315px);
     }
-    .reel div:nth-child(4) {
+    .reel .pane:nth-child(4) {
       border: 1px solid #f0f;
       transform: rotateY(54deg) translateZ(315px);
     }
-    .reel div:nth-child(5) {
+    .reel .pane:nth-child(5) {
       border: 1px solid #000;
       transform: rotateY(72deg) translateZ(315px);
     }
-    .reel div:nth-child(6) {
+    .reel .pane:nth-child(6) {
       border: 1px solid #000;
       transform: rotateY(90deg) translateZ(315px);
     }
-    .reel div:nth-child(7) {
+    .reel .pane:nth-child(7) {
       border: 1px solid #000;
       transform: rotateY(108deg) translateZ(315px);
     }
-    .reel div:nth-child(8) {
+    .reel .pane:nth-child(8) {
       border: 1px solid #000;
       transform: rotateY(126deg) translateZ(315px);
     }
-    .reel div:nth-child(9) {
+    .reel .pane:nth-child(9) {
       border: 1px solid #000;
       transform: rotateY(144deg) translateZ(315px);
     }
-    .reel div:nth-child(10) {
+    .reel .pane:nth-child(10) {
       border: 1px solid #000;
       transform: rotateY(162deg) translateZ(315px);
     }
-    .reel div:nth-child(11) {
+    .reel .pane:nth-child(11) {
       border: 1px solid #000;
       transform: rotateY(180deg) translateZ(315px);
     }
-    .reel div:nth-child(12) {
+    .reel .pane:nth-child(12) {
       border: 1px solid #000;
       transform: rotateY(198deg) translateZ(315px);
     }
-    .reel div:nth-child(13) {
+    .reel .pane:nth-child(13) {
       border: 1px solid #000;
       transform: rotateY(216deg) translateZ(315px);
     }
-    .reel div:nth-child(14) {
+    .reel .pane:nth-child(14) {
       border: 1px solid #000;
       transform: rotateY(234deg) translateZ(315px);
     }
-    .reel div:nth-child(15) {
+    .reel .pane:nth-child(15) {
       border: 1px solid #000;
       transform: rotateY(252deg) translateZ(315px);
     }
-    .reel div:nth-child(16) {
+    .reel .pane:nth-child(16) {
       border: 1px solid #000;
       transform: rotateY(270deg) translateZ(315px);
     }
-    .reel div:nth-child(17) {
+    .reel .pane:nth-child(17) {
       border: 1px solid #000;
       transform: rotateY(288deg) translateZ(315px);
     }
-    .reel div:nth-child(18) {
+    .reel .pane:nth-child(18) {
       border: 1px solid #000;
       transform: rotateY(306deg) translateZ(315px);
     }
-    .reel div:nth-child(19) {
+    .reel .pane:nth-child(19) {
       border: 1px solid #000;
       transform: rotateY(324deg) translateZ(315px);
     }
-    .reel div:nth-child(20) {
+    .reel .pane:nth-child(20) {
       border: 1px solid #000;
       transform: rotateY(342deg) translateZ(315px);
     }
@@ -184,73 +184,4 @@ export default defineComponent({
         transform: rotateY(0deg) translateZ(0px);
       }
     }
-
-/*
-.reel {width:10vw;background-color:gray}
-*/
-/*
-.reel figure {
-  display: block;
-  position: absolute;
-  width: 14vw;
-  height: 14vw;
-  top: -8vw;
-  border: 2px solid #000;
-	backface-visibility: hidden;
-}
-.reel {
-	animation: spinY 20s infinite normal linear both paused;
-}
-.reel.spinning{
-	animation: spinY 20s infinite normal linear both running;
-}
-
-.reel_container {
-	width: 20px;
-	height: 10px;
-	position: relative;
-	margin: 0 auto 0px;
-	border: 1px solid #FFFF;
-	top:20vw;
-
-	transform:rotateZ(-90deg);
-	perspective: 1100px;
-}
-
-.reel {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	-webkit-transform-style: preserve-3d;
-		 -moz-transform-style: preserve-3d;
-			 -o-transform-style: preserve-3d;
-					transform-style: preserve-3d;
-}
-
-@keyframes spinY {
-		0% {transform:rotateY(360deg);}
-		100% {transform:rotateY(0deg);}
-}
-
-.reel figure:nth-child(1) { -webkit-transform: rotateY(0deg) translateZ(50vw); }
-.reel figure:nth-child(2) { -webkit-transform: rotateY(18deg) translateZ(50vw); }
-.reel figure:nth-child(3) { -webkit-transform: rotateY(36deg) translateZ(50vw); }
-.reel figure:nth-child(4) { -webkit-transform: rotateY(54deg) translateZ(50vw); }
-.reel figure:nth-child(5) { -webkit-transform: rotateY(72deg) translateZ(50vw); }
-.reel figure:nth-child(6) { -webkit-transform: rotateY(90deg) translateZ(50vw); }
-.reel figure:nth-child(7) { -webkit-transform: rotateY(108deg) translateZ(50vw); }
-.reel figure:nth-child(8) { -webkit-transform: rotateY(126deg) translateZ(50vw); }
-.reel figure:nth-child(9) { -webkit-transform: rotateY(144deg) translateZ(50vw); }
-.reel figure:nth-child(10) { -webkit-transform: rotateY(162deg) translateZ(50vw); }
-.reel figure:nth-child(11) { -webkit-transform: rotateY(180deg) translateZ(50vw); }
-.reel figure:nth-child(12) { -webkit-transform: rotateY(198deg) translateZ(50vw); }
-.reel figure:nth-child(13) { -webkit-transform: rotateY(216deg) translateZ(50vw); }
-.reel figure:nth-child(14) { -webkit-transform: rotateY(234deg) translateZ(50vw); }
-.reel figure:nth-child(15) { -webkit-transform: rotateY(252deg) translateZ(50vw); }
-.reel figure:nth-child(16) { -webkit-transform: rotateY(270deg) translateZ(50vw); }
-.reel figure:nth-child(17) { -webkit-transform: rotateY(288deg) translateZ(50vw); }
-.reel figure:nth-child(18) { -webkit-transform: rotateY(306deg) translateZ(50vw); }
-.reel figure:nth-child(19) { -webkit-transform: rotateY(324deg) translateZ(50vw); }
-.reel figure:nth-child(20) { -webkit-transform: rotateY(342deg) translateZ(50vw); }
-*/
 </style>
