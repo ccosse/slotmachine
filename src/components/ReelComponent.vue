@@ -1,5 +1,5 @@
 <template>
-  <div class="reel_container">
+  <div v-bind:id="this.reelcontainerid" class="reel_container">
     <div v-bind:id="this.reelid" class="reel">
       <div v-for="(val,idx) in this.tileImgs" :key="idx" class="pane">
         <TileComponent :imgUrl="this.tileImgs[idx]" />
@@ -39,7 +39,7 @@ const reelImgs = [
 export default defineComponent({
   name: 'ReelComponent',
   components: { TileComponent },
-  props: [ 'reelIdx', 'reelid' ],
+  props: [ 'reelIdx', 'reelid', 'reelcontainerid' ],
   setup(props){
     return {
       tileImgs: ref([])
@@ -62,9 +62,24 @@ export default defineComponent({
       position: absolute;
       border: 1px solid #f00f;
       top: calc((700px - 10px) / 2);
-      left: calc((100% -20px) / 2);
+      /*left: calc((100% -20px) / 5);*/
       transform: rotateZ(-90deg);
       perspective: 1200px;
+    }
+    #reelcontainer0 {
+      left: calc(1*(100% -20px) / 6);
+    }
+    #reelcontainer1 {
+      left: calc(2*(100% -20px) / 6);
+    }
+    #reelcontainer2 {
+      left: calc(3*(100% -20px) / 6);
+    }
+    #reelcontainer3 {
+      left: calc(4*(100% -20px) / 6);
+    }
+    #reelcontainer4 {
+      left: calc(5*(100% -20px) / 6);
     }
     .reel {
       width: 100%;
