@@ -46,7 +46,7 @@ export default defineComponent({
     }
   },
   mounted(){
-    this.tileImgs = reelImgs.slice(2*this.reelIdx,20).concat(reelImgs.slice(0, 2*this.reelIdx))
+    this.tileImgs = reelImgs //.slice(2*this.reelIdx,20).concat(reelImgs.slice(0, 2*this.reelIdx))
   }
 })
 </script>
