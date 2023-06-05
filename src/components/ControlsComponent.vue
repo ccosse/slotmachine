@@ -29,15 +29,17 @@ export default defineComponent({
       console.log('Stop')
       this.spinning = false
       d3.select("#reel0").classed("spinning", this.spinning)
+      /*
       d3.select("#reel1").classed("spinning", this.spinning)
       d3.select("#reel2").classed("spinning", this.spinning)
       d3.select("#reel3").classed("spinning", this.spinning)
       d3.select("#reel4").classed("spinning", this.spinning)
+      */
     }
   }
 })
 </script>
 <style>
-.controls {width:80vw;height:100px;background-color:orange}
+.controls {width:100%;height:100px;background-color:orange}
 .controlB {width: 100px; height:50px; }
 </style>
