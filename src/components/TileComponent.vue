@@ -1,5 +1,5 @@
 <template>
-  <q-img :src="this.imgUrl" style="opacity:0.5;width:100px;height:100px;transform:rotateZ(90deg)"></q-img>
+  <q-img :src="this.imgUrl" style="opacity:.6;width:100px;height:100px;transform:rotateZ(90deg)"></q-img>
 </template>
 <script>
 import { defineComponent } from 'vue'

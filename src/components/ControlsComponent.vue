@@ -42,7 +42,7 @@ export default defineComponent({
         this.paused = false
         d3.selectAll(".reel").classed("spinning", this.spinning)
         this.tick()
-        const dtRun = (parseInt(Math.random()*5) * 1000 + 250) // 250 = .25s = 1 Pane @ 360(20)/5s
+        const dtRun = (3000 + parseInt(Math.random()*3) * 1000 + 250) // 250 = .25s = 1 Pane @ 360(20)/5s
         console.log('dtRun', dtRun)
         window.setTimeout(() => this.stop(), dtRun)
       }, 100)
