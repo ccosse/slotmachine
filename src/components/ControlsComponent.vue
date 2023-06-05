@@ -28,13 +28,21 @@ export default defineComponent({
     stop(){
       console.log('Stop')
       this.spinning = false
-      d3.select("#reel0").classed("spinning", this.spinning)
-      /*
-      d3.select("#reel1").classed("spinning", this.spinning)
-      d3.select("#reel2").classed("spinning", this.spinning)
-      d3.select("#reel3").classed("spinning", this.spinning)
-      d3.select("#reel4").classed("spinning", this.spinning)
-      */
+      window.setTimeout(() => {
+        d3.select("#reel0").classed("spinning", this.spinning)
+      },10)
+      window.setTimeout(() => {
+        d3.select("#reel1").classed("spinning", this.spinning)
+      },500)
+      window.setTimeout(() => {
+        d3.select("#reel2").classed("spinning", this.spinning)
+      },1000)
+      window.setTimeout(() => {
+        d3.select("#reel3").classed("spinning", this.spinning)
+      },1500)
+      window.setTimeout(() => {
+        d3.select("#reel4").classed("spinning", this.spinning)
+      },2000)
     }
   }
 })

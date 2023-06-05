@@ -186,10 +186,10 @@ export default defineComponent({
     }
 
     .reel {
-      animation: spinY 20s infinite normal linear both paused;
+      animation: spinY 5s infinite normal linear both paused;
     }
     .reel.spinning {
-      animation: spinY 20s infinite normal linear both running;
+      animation: spinY 5s infinite normal linear both running;
     }
     @keyframes spinY {
       0% {
