@@ -13,6 +13,9 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import ReelComponent from 'components/ReelComponent.vue'
+/**
+  The StageComponent holds the holds a set of ReelComponents
+*/
 export default defineComponent({
   name: 'StageComponent',
   components: { ReelComponent },

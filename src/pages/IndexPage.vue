@@ -11,6 +11,9 @@
 import { defineComponent } from 'vue'
 import StageComponent from 'components/StageComponent.vue'
 import ControlsComponent from 'components/ControlsComponent.vue'
+/**
+  The IndexPage holds the Stage and Controls
+*/
 export default defineComponent({
   name: 'IndexPage',
   components: {StageComponent, ControlsComponent},

@@ -1,8 +1,9 @@
 <template>
   <div id="controlPanel" class="controls flex flex-col flex-center justify-center">
     <div>
+    <div class="" id="resultsLabel">-.-.-.-.-</div>
       <div class="" id="timerLabel">
-      {{this.t_elapsed}}
+      {{this.t_elapsed.toFixed(3)}}
       </div>
       <q-btn class="controlB" no-caps style="background-color:green" v-if="!this.spinning" @click="this.spin()">Spin</q-btn>
       <q-btn class="controlB" no-caps style="background-color:red" v-else @click="this.stop()">Stop</q-btn>
@@ -12,6 +13,10 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import * as d3 from 'd3'
+/**
+  The ControlsComponent holds the timerLabel and Start/Stop button
+  It performs a double hyperbolic transform in parabolic coordinates.
+*/
 export default defineComponent({
   name: 'ControlsComponent',
   props: ['t360', 'numpane'],
@@ -38,7 +43,7 @@ export default defineComponent({
   },
   methods:{
     tick(){
-      d3.select("#timerLabel").html((Date.now() - this.t0)/1000.)
+      d3.select("#timerLabel").html(((Date.now() - this.t0)/1000.).toFixed(3))
       if (this.spinning == true) {
         cancelAnimationFrame(this.interval);
         this.interval = requestAnimationFrame(() => {
@@ -47,6 +52,7 @@ export default defineComponent({
       }
     },
     spin(){
+      d3.select("#resultsLabel").html('-.-.-.-.-')
       d3.selectAll(".reel").classed("spinning", false)
       d3.selectAll(".reel").classed("paused", false) // this resets to initial zero rotation
       window.setTimeout(() => {
@@ -69,32 +75,54 @@ export default defineComponent({
       this.spinning = false
       this.paused = true
       // reels stop from L to R by adding sufficient int to allow for max previous dt
+      let HTML = ''
       window.setTimeout(() => {
         d3.select("#reel0").classed("spinning", this.spinning)
         d3.select("#reel0").classed("paused", this.paused)
+        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        while (tileNo > 20) tileNo -= 20
+        HTML += tileNo + ", "
+        d3.select("#resultsLabel").html(HTML)
       },0*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel1").classed("spinning", this.spinning)
         d3.select("#reel1").classed("paused", this.paused)
+        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        while (tileNo > 20) tileNo -= 20
+        HTML += tileNo + ", "
+        d3.select("#resultsLabel").html(HTML)
       },(1 + parseInt(Math.random() * 5))*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel2").classed("spinning", this.spinning)
         d3.select("#reel2").classed("paused", this.paused)
+        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        while (tileNo > 20) tileNo -= 20
+        HTML += tileNo + ", "
+        d3.select("#resultsLabel").html(HTML)
       },(5 + parseInt(Math.random() * 5))*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel3").classed("spinning", this.spinning)
         d3.select("#reel3").classed("paused", this.paused)
+        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        while (tileNo > 20) tileNo -= 20
+        HTML += tileNo + ", "
+        d3.select("#resultsLabel").html(HTML)
       },(9 + parseInt(Math.random()) * 5)*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel4").classed("spinning", this.spinning)
         d3.select("#reel4").classed("paused", this.paused)
+        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        while (tileNo > 20) tileNo -= 20
+        HTML += tileNo
+        d3.select("#resultsLabel").html(HTML)
       },(13 + parseInt(Math.random() * 5))*this.msPerTab)
     }
   }
 })
 </script>
 <style>
-.controls {width:100%;height:100px;background-color:orange}
-.controlB {width: 100px; height:50px; }
-#timerLabel {font-weight: bold; font-size: 24px;position:relative;left:20px}
+.controls {width:100%;height:150px;background-color:orange}
+.controlB {width: 100px; height:50px;width:200px }
+#timerLabel {font-weight: bold; font-size: 24px;position:relative;width:200px;left:70px}
+#resultsLabel {font-weight: bold; font-size: 24px;position:relative;width:200px;text-align:center;}
 </style>

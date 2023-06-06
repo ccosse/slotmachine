@@ -2,8 +2,7 @@
   <div v-bind:id="this.reelcontainerid" class="reel_container">
     <div v-bind:id="this.reelid" class="reel">
       <div v-for="(val,idx) in this.numpanes" :key="idx" class="pane">
-        <TileComponent :imgUrl="this.tileImgs[idx]" :w_pane="this.w_pane" :h_pane="this.h_pane"/>
-        <span class="hidden">{{val}}</span>
+        <TileComponent :imgUrl="this.tileImgs[idx]" :w_pane="this.w_pane" :h_pane="this.h_pane" :idx="idx"/>
       </div>
     </div>
   </div>
@@ -33,6 +32,10 @@ const reelImgs = [
   'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven3.png',
   'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/chest.png'
 ]
+/**
+  The ReelComponent holds contains npane TileComonents arranged in a carousel 
+  by CSS3D properties.
+*/
 export default defineComponent({
   name: 'ReelComponent',
   components: { TileComponent },
