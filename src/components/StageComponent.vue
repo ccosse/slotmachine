@@ -1,10 +1,10 @@
 <template>
   <div id="stage" class="stage">
-    <ReelComponent :reelIdx="0" :reelid="'reel0'" :reelcontainerid="'reelcontainer0'"/>
-    <ReelComponent :reelIdx="1" :reelid="'reel1'" :reelcontainerid="'reelcontainer1'"/>
-    <ReelComponent :reelIdx="2" :reelid="'reel2'" :reelcontainerid="'reelcontainer2'"/>
-    <ReelComponent :reelIdx="3" :reelid="'reel3'" :reelcontainerid="'reelcontainer3'"/>
-    <ReelComponent :reelIdx="4" :reelid="'reel4'" :reelcontainerid="'reelcontainer4'"/>
+    <ReelComponent :reelIdx="0" :reelid="'reel0'" :reelcontainerid="'reelcontainer0'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :reelIdx="1" :reelid="'reel1'" :reelcontainerid="'reelcontainer1'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :reelIdx="2" :reelid="'reel2'" :reelcontainerid="'reelcontainer2'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :reelIdx="3" :reelid="'reel3'" :reelcontainerid="'reelcontainer3'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :reelIdx="4" :reelid="'reel4'" :reelcontainerid="'reelcontainer4'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
     <!--
     -->
     <hline id="h2"/>
@@ -16,7 +16,9 @@ import ReelComponent from 'components/ReelComponent.vue'
 export default defineComponent({
   name: 'StageComponent',
   components: { ReelComponent },
-  setup(){
+  props: ['t360'],
+  setup(props){
+    console.log(props)
     return {
       t_elapsed: ref(0)
     }

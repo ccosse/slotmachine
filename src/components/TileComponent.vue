@@ -1,12 +1,18 @@
 <template>
-  <q-img :src="this.imgUrl" style="opacity:.6;width:100px;height:100px;transform:rotateZ(90deg)"></q-img>
+  <q-img
+    :src="this.imgUrl"
+    :width="this.w_pane"
+    :height="this.h_pane"
+    style="opacity:.6;transform:rotateZ(90deg)"
+  ></q-img>
 </template>
 <script>
 import { defineComponent } from 'vue'
 export default defineComponent ({
   name: 'TileComponent',
-  props: ['imgUrl'],
-  setup () {
+  props: ['imgUrl', 'w_pane', 'h_pane'],
+  setup (props) {
+    console.log(props)
     return {
     }
   }

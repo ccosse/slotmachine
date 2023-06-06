@@ -1,12 +1,9 @@
 <template>
   <div v-bind:id="this.reelcontainerid" class="reel_container">
     <div v-bind:id="this.reelid" class="reel">
-      <div v-for="(val,idx) in this.tileImgs" :key="idx" class="pane">
-        <TileComponent :imgUrl="this.tileImgs[idx]" />
+      <div v-for="(val,idx) in this.numpanes" :key="idx" class="pane">
+        <TileComponent :imgUrl="this.tileImgs[idx]" :w_pane="this.w_pane" :h_pane="this.h_pane"/>
         <span class="hidden">{{val}}</span>
-        <!--
-        <img src="https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/cherries.png" style="opacity:0.5;width:100px;height:100px;transform:rotateZ(90deg)">
-        -->
       </div>
     </div>
   </div>
@@ -39,7 +36,7 @@ const reelImgs = [
 export default defineComponent({
   name: 'ReelComponent',
   components: { TileComponent },
-  props: [ 'reelIdx', 'reelid', 'reelcontainerid' ],
+  props: [ 'reelIdx', 'reelid', 'reelcontainerid', 't360', 'numpanes', 'w_pane', 'h_pane' ],
   setup(props){
     return {
       tileImgs: ref([])
@@ -181,10 +178,10 @@ export default defineComponent({
     }
 
     .reel.paused {
-      animation: spinY 5s infinite normal linear both paused;
+      animation: spinY 5s infinite normal linear forwards paused;
     }
     .reel.spinning {
-      animation: spinY 5s infinite normal linear both running;
+      animation: spinY 5s infinite normal linear forwards running;
     }
     @keyframes spinY {
       0% {

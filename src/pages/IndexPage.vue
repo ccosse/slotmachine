@@ -1,8 +1,9 @@
 <template>
   <q-page>
     <div>
-    <StageComponent />
-    <ControlsComponent />
+    <!-- t360 < 5 is too accurate and leads to bad alignment; also must manually set animation-duration at ReelComponent-->
+    <StageComponent :t360="5"/>
+    <ControlsComponent :t360="5" :numpane="20"/>
     </div>
   </q-page>
 </template>
