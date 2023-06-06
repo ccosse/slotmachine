@@ -10,7 +10,7 @@
       {{this.t_elapsed.toFixed(3)}}
       </div>
       <q-btn class="controlB" no-caps style="background-color:green" v-if="!this.spinning" @click="this.spin()">Spin</q-btn>
-      <q-btn class="controlB" no-caps style="background-color:red" v-else @click="this.stop()">Stop</q-btn>
+      <q-btn class="controlB" no-caps style="background-color:red" v-else >Wait ...</q-btn>
     </div>
   </div>
 </template>
@@ -84,7 +84,7 @@ export default defineComponent({
         d3.select("#reel0").classed("spinning", this.spinning)
         d3.select("#reel0").classed("paused", this.paused)
         let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 19
+        while (tileNo > 19) tileNo -= 20
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },0*this.msPerTab)
@@ -92,7 +92,7 @@ export default defineComponent({
         d3.select("#reel1").classed("spinning", this.spinning)
         d3.select("#reel1").classed("paused", this.paused)
         let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 19
+        while (tileNo > 19) tileNo -= 20
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(1 + parseInt(Math.random() * 5))*this.msPerTab)
@@ -100,7 +100,7 @@ export default defineComponent({
         d3.select("#reel2").classed("spinning", this.spinning)
         d3.select("#reel2").classed("paused", this.paused)
         let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 19
+        while (tileNo > 19) tileNo -= 20
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(5 + parseInt(Math.random() * 5))*this.msPerTab)
@@ -108,7 +108,7 @@ export default defineComponent({
         d3.select("#reel3").classed("spinning", this.spinning)
         d3.select("#reel3").classed("paused", this.paused)
         let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 19
+        while (tileNo > 19) tileNo -= 20
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(9 + parseInt(Math.random()) * 5)*this.msPerTab)
@@ -116,7 +116,7 @@ export default defineComponent({
         d3.select("#reel4").classed("spinning", this.spinning)
         d3.select("#reel4").classed("paused", this.paused)
         let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 19
+        while (tileNo > 19) tileNo -= 20
         HTML += tileNo
         d3.select("#resultsLabel").html(HTML)
       },(13 + parseInt(Math.random() * 5))*this.msPerTab)
