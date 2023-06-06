@@ -1,6 +1,9 @@
 /**
-  
-  
+  Author          :Charlie Cosse
+  Website         :www.asymptopia.com
+  Email           :ccosse@gmail.com
+  Copyright       :(C) 2023 Asymptopia Software
+  License         :ALL RIGHTS RESERVED
 */
 <template>
   <div id="controlPanel" class="controls flex flex-col flex-center justify-center">

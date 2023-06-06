@@ -1,3 +1,10 @@
+/**
+  Author          :Charlie Cosse
+  Website         :www.asymptopia.com
+  Email           :ccosse@gmail.com
+  Copyright       :(C) 2023 Asymptopia Software
+  License         :ALL RIGHTS RESERVED
+*/
 <template>
   <div id="stage" class="stage">
     <ReelComponent :reelIdx="0" :reelid="'reel0'" :reelcontainerid="'reelcontainer0'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>

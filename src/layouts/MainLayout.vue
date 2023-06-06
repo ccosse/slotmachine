@@ -1,5 +1,11 @@
+/**
+  Author          :Charlie Cosse
+  Website         :www.asymptopia.com
+  Email           :ccosse@gmail.com
+  Copyright       :(C) 2023 Asymptopia Software
+  License         :ALL RIGHTS RESERVED
+*/
 <template>
-  <!--Splash layout with no headers or sidebars-->
   <q-layout view="hHh lpR fFf">
     <q-page-container>
       <router-view />
@@ -12,7 +18,7 @@ import { defineComponent } from 'vue'
 import { Dark } from 'quasar'
 
 export default defineComponent({
-  name: 'SplashLayout',
+  name: 'MainLayout',
 
   components: {},
 
