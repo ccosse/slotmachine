@@ -38,7 +38,8 @@ export default defineComponent({
       degPerPane: parseFloat(360./props.numpane),
       degPerSec: 360./parseFloat(props.t360),
       secPerTab: null,
-      msPerTab: null
+      msPerTab: null,
+      startNumbers: [0, 0, 0, 0, 0]
     }
   },
   mounted(){
@@ -61,7 +62,7 @@ export default defineComponent({
     spin(){
       d3.select("#resultsLabel").html('-.-.-.-.-')
       d3.selectAll(".reel").classed("spinning", false)
-      d3.selectAll(".reel").classed("paused", false) // this resets to initial zero rotation
+      // d3.selectAll(".reel").classed("paused", false) // this resets to initial zero rotation
       window.setTimeout(() => {
         console.log('Spin')
         this.t0 = Date.now()
@@ -69,7 +70,7 @@ export default defineComponent({
         this.paused = false
         // 250 = .25s = 1 Pane @ 360(20)/5s; +250 -> currently advancing by 1 pane ea reel
         // const dtRun = (3000 + parseInt(Math.random()*3) * 1000 + this.msPerTab)
-        const dtRun = ((this.msPerTab*10) + parseInt(Math.random()*3) * (this.msPerTab) + this.msPerTab) //
+        const dtRun = ((this.msPerTab*10) + parseInt(Math.random()*10) * (this.msPerTab) + this.msPerTab) //
         console.log('dtRun', dtRun)
         d3.selectAll(".reel").classed("spinning", this.spinning)
         this.tick()
@@ -86,15 +87,17 @@ export default defineComponent({
       window.setTimeout(() => {
         d3.select("#reel0").classed("spinning", this.spinning)
         d3.select("#reel0").classed("paused", this.paused)
-        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        let tileNo = this.startNumbers[0] + parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
+        this.startNumbers[0] = tileNo
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },0*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel1").classed("spinning", this.spinning)
         d3.select("#reel1").classed("paused", this.paused)
-        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        let tileNo = this.startNumbers[1] + parseInt((Date.now() - this.t0)/this.msPerTab)
+        this.startNumbers[1] = tileNo
         while (tileNo > 19) tileNo -= 20
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
@@ -102,24 +105,27 @@ export default defineComponent({
       window.setTimeout(() => {
         d3.select("#reel2").classed("spinning", this.spinning)
         d3.select("#reel2").classed("paused", this.paused)
-        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        let tileNo = this.startNumbers[2] + parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
+        this.startNumbers[2] = tileNo
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(5 + parseInt(Math.random() * 5))*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel3").classed("spinning", this.spinning)
         d3.select("#reel3").classed("paused", this.paused)
-        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        let tileNo = this.startNumbers[3] + parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
+        this.startNumbers[3] = tileNo
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(9 + parseInt(Math.random()) * 5)*this.msPerTab)
       window.setTimeout(() => {
         d3.select("#reel4").classed("spinning", this.spinning)
         d3.select("#reel4").classed("paused", this.paused)
-        let tileNo = parseInt((Date.now() - this.t0)/this.msPerTab)
+        let tileNo = this.startNumbers[4]+ parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
+        this.startNumbers[4] = tileNo
         HTML += tileNo
         d3.select("#resultsLabel").html(HTML)
       },(13 + parseInt(Math.random() * 5))*this.msPerTab)

@@ -187,10 +187,10 @@ export default defineComponent({
     transform: rotateY(342deg) translateZ(315px);
   }
   .reel.paused {
-    animation: spinY 5s infinite normal linear forwards paused;
+    animation: spinY 5000ms infinite normal linear forwards paused;
   }
   .reel.spinning {
-    animation: spinY 5s infinite normal linear forwards running;
+    animation: spinY 5000ms infinite normal linear forwards running;
   }
   @keyframes spinY {
     0% {
