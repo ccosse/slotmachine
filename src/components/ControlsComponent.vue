@@ -114,6 +114,7 @@ export default defineComponent({
         let tileNo = this.startNumbers[0] + parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
         this.startNumbers[0] = tileNo
+        console.log(this.ximgs[0][tileNo])
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },0*this.msPerTab)
@@ -123,6 +124,7 @@ export default defineComponent({
         let tileNo = this.startNumbers[1] + parseInt((Date.now() - this.t0)/this.msPerTab)
         this.startNumbers[1] = tileNo
         while (tileNo > 19) tileNo -= 20
+        console.log(this.ximgs[1][tileNo])
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(1 + parseInt(Math.random() * 5))*this.msPerTab)
@@ -132,6 +134,7 @@ export default defineComponent({
         let tileNo = this.startNumbers[2] + parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
         this.startNumbers[2] = tileNo
+        console.log(this.ximgs[2][tileNo])
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(5 + parseInt(Math.random() * 5))*this.msPerTab)
@@ -141,6 +144,7 @@ export default defineComponent({
         let tileNo = this.startNumbers[3] + parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
         this.startNumbers[3] = tileNo
+        console.log(this.ximgs[3][tileNo])
         HTML += tileNo + ", "
         d3.select("#resultsLabel").html(HTML)
       },(9 + parseInt(Math.random()) * 5)*this.msPerTab)
@@ -149,6 +153,7 @@ export default defineComponent({
         d3.select("#reel4").classed("paused", this.paused)
         let tileNo = this.startNumbers[4]+ parseInt((Date.now() - this.t0)/this.msPerTab)
         while (tileNo > 19) tileNo -= 20
+        console.log(this.ximgs[4][tileNo])
         this.startNumbers[4] = tileNo
         HTML += tileNo
         d3.select("#resultsLabel").html(HTML)
