@@ -46,14 +46,15 @@ const reelImgs = [
 export default defineComponent({
   name: 'ReelComponent',
   components: { TileComponent },
-  props: [ 'reelIdx', 'reelid', 'reelcontainerid', 't360', 'numpanes', 'w_pane', 'h_pane' ],
+  props: [ 'ximgs', 'reelIdx', 'reelid', 'reelcontainerid', 't360', 'numpanes', 'w_pane', 'h_pane' ],
   setup(props){
     return {
       tileImgs: ref([])
     }
   },
   mounted(){
-    this.tileImgs = reelImgs.slice(2*this.reelIdx,20).concat(reelImgs.slice(0, 2*this.reelIdx))
+    const offset = 3 // each reel is advanced by <offset> images from the previous reel (-3, +3); more than |3| * (5 reels) > 20 -> WRAP-ERROR
+    this.tileImgs = this.ximgs // reelImgs.slice(offset*this.reelIdx,20).concat(reelImgs.slice(0, offset*this.reelIdx))
   }
 })
 </script>

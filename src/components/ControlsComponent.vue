@@ -37,7 +37,7 @@ export default defineComponent({
   components: {
     ConfettiExplosion
   },
-  props: ['t360', 'numpane'],
+  props: ['ximgs', 't360', 'numpane'],
   setup(props){
     console.log(props)
     return {

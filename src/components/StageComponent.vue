@@ -7,11 +7,11 @@
 */
 <template>
   <div id="stage" class="stage">
-    <ReelComponent :reelIdx="0" :reelid="'reel0'" :reelcontainerid="'reelcontainer0'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :reelIdx="1" :reelid="'reel1'" :reelcontainerid="'reelcontainer1'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :reelIdx="2" :reelid="'reel2'" :reelcontainerid="'reelcontainer2'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :reelIdx="3" :reelid="'reel3'" :reelcontainerid="'reelcontainer3'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :reelIdx="4" :reelid="'reel4'" :reelcontainerid="'reelcontainer4'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :ximgs = "this.ximgs[0]" :reelIdx="0" :reelid="'reel0'" :reelcontainerid="'reelcontainer0'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :ximgs = "this.ximgs[1]" :reelIdx="1" :reelid="'reel1'" :reelcontainerid="'reelcontainer1'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :ximgs = "this.ximgs[2]" :reelIdx="2" :reelid="'reel2'" :reelcontainerid="'reelcontainer2'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :ximgs = "this.ximgs[3]" :reelIdx="3" :reelid="'reel3'" :reelcontainerid="'reelcontainer3'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent :ximgs = "this.ximgs[4]" :reelIdx="4" :reelid="'reel4'" :reelcontainerid="'reelcontainer4'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
     <!--
     -->
     <hline id="h2"/>
@@ -29,7 +29,7 @@ export default defineComponent({
   components: {
     ReelComponent
   },
-  props: ['t360'],
+  props: ['t360', 'ximgs'],
   setup(props){
     console.log(props)
     return {
