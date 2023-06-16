@@ -8,6 +8,13 @@
 <template>
   <div id="controlPanel" class="controls flex flex-col flex-center justify-center">
     <div>
+    <span class="confetti hidden fixed-center">
+      <ConfettiExplosion
+        v-if="confettiOn"
+        :stageHeight="800"
+        style="position: relative; top: -200px; left: 40px"
+      />
+    </span>
     <div class="" id="resultsLabel">-.-.-.-.-</div>
       <div class="" id="timerLabel">
       {{this.t_elapsed.toFixed(3)}}
@@ -20,12 +27,16 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import * as d3 from 'd3'
+import ConfettiExplosion from 'vue-confetti-explosion'
 /**
   The ControlsComponent holds the timerLabel and Start/Stop button
   It performs a double hyperbolic transform in parabolic coordinates.
 */
 export default defineComponent({
   name: 'ControlsComponent',
+  components: {
+    ConfettiExplosion
+  },
   props: ['t360', 'numpane'],
   setup(props){
     console.log(props)
@@ -39,7 +50,8 @@ export default defineComponent({
       degPerSec: 360./parseFloat(props.t360),
       secPerTab: null,
       msPerTab: null,
-      startNumbers: [0, 0, 0, 0, 0]
+      startNumbers: [0, 0, 0, 0, 0],
+      confettiOn: ref(false)
     }
   },
   mounted(){
@@ -48,8 +60,20 @@ export default defineComponent({
     this.secPerTab = this.degPerPane / this.degPerSec
     console.log('secPerTab', this.secPerTab)
     this.msPerTab = this.secPerTab * 1000.
+    console.log('confettiOn', this.confettiOn)
   },
   methods:{
+    async explode () {
+      console.log('EXPLODE!')
+      d3.select('.confetti').classed('hidden', false).classed('z-max', true)
+      this.confettiOn = true
+      // await nextTick();
+      window.setTimeout(() => {
+        this.confettiOn = false
+        d3.select('.confetti').classed('hidden', true)
+        console.log('confettiOn', this.confettiOn)
+      }, 5000)
+    },
     tick(){
       d3.select("#timerLabel").html(((Date.now() - this.t0)/1000.).toFixed(3))
       if (this.spinning == true) {
@@ -128,6 +152,7 @@ export default defineComponent({
         this.startNumbers[4] = tileNo
         HTML += tileNo
         d3.select("#resultsLabel").html(HTML)
+        this.explode()
       },(13 + parseInt(Math.random() * 5))*this.msPerTab)
     }
   }

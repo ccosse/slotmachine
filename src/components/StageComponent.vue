@@ -23,9 +23,12 @@ import ReelComponent from 'components/ReelComponent.vue'
 /**
   The StageComponent holds the holds a set of ReelComponents
 */
+
 export default defineComponent({
   name: 'StageComponent',
-  components: { ReelComponent },
+  components: {
+    ReelComponent
+  },
   props: ['t360'],
   setup(props){
     console.log(props)
