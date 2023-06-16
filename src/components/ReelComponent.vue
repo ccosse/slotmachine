@@ -17,28 +17,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import TileComponent from 'components/TileComponent.vue'
-const reelImgs = [
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/cherries.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/pineapple.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/lemon.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/gem.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven2.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/bar.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/bell.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven3.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/dollar.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/cherries.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/pineapple.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/lemon.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/gem.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven2.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/bar.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/bell.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven3.png',
-  'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/chest.png'
-]
 /**
   The ReelComponent holds contains npane TileComonents arranged in a carousel 
   by CSS3D properties.
@@ -53,8 +31,7 @@ export default defineComponent({
     }
   },
   mounted(){
-    const offset = 3 // each reel is advanced by <offset> images from the previous reel (-3, +3); more than |3| * (5 reels) > 20 -> WRAP-ERROR
-    this.tileImgs = this.ximgs // reelImgs.slice(offset*this.reelIdx,20).concat(reelImgs.slice(0, offset*this.reelIdx))
+    this.tileImgs = this.ximgs
   }
 })
 </script>

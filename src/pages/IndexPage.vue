@@ -43,7 +43,7 @@ const reelImgs = [
   'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/seven3.png',
   'https://raw.githubusercontent.com/ccosse/slotmachine/master/src/assets/chest.png'
 ]
-const offset = 1
+const offset = 3 // each reel is advanced by <offset> images from the previous reel (-3, +3); more than |3| * (5 reels) > 20 -> WRAP-ERROR
 export default defineComponent({
   name: 'IndexPage',
   components: {StageComponent, ControlsComponent},
