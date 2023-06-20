@@ -42,24 +42,23 @@ export default defineComponent({
     position: absolute;
     border: 1px solid #f00f;
     top: calc((700px - 10px) / 2);
-    /*left: calc((100% -20px) / 5);*/
     transform: rotateZ(-90deg);
     perspective: 1200px;
   }
   #reelcontainer0 {
-    left: calc(1*(930px)/6);
+    left: calc(1*(100% - 20px) / 6);
   }
   #reelcontainer1 {
-    left: calc(2*(930px)/6);
+    left: calc(2*(100% - 20px) / 6);
   }
   #reelcontainer2 {
-    left: calc(3*(930px)/6);
+    left: calc(3*(100% - 20px) / 6);
   }
   #reelcontainer3 {
-    left: calc(4*(930px)/6);
+    left: calc(4*(100% - 20px) / 6);
   }
   #reelcontainer4 {
-    left: calc(5*(930px)/6);
+    left: calc(5*(100% - 20px) / 6);
   }
   .reel {
     width: 100%;

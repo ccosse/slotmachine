@@ -43,7 +43,7 @@ export default defineComponent({
 </script>
 <style>
 #stage {
-  width: 950px;
+  width: 100%;
   height: 700px;
   background-color: #bbddbb;
 }
@@ -51,7 +51,7 @@ export default defineComponent({
   position: absolute;
   top: 350px;
   background-color: red;
-  width:950px;
+  width:100%;
   height:1px;
 }
 </style>
