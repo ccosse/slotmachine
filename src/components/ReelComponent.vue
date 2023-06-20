@@ -47,19 +47,19 @@ export default defineComponent({
     perspective: 1200px;
   }
   #reelcontainer0 {
-    left: calc(1*(100% -20px) / 6);
+    left: calc(1*(930px)/6);
   }
   #reelcontainer1 {
-    left: calc(2*(100% -20px) / 6);
+    left: calc(2*(930px)/6);
   }
   #reelcontainer2 {
-    left: calc(3*(100% -20px) / 6);
+    left: calc(3*(930px)/6);
   }
   #reelcontainer3 {
-    left: calc(4*(100% -20px) / 6);
+    left: calc(4*(930px)/6);
   }
   #reelcontainer4 {
-    left: calc(5*(100% -20px) / 6);
+    left: calc(5*(930px)/6);
   }
   .reel {
     width: 100%;

@@ -6,15 +6,15 @@
   License         :ALL RIGHTS RESERVED
 */
 <template>
-  <div id="controlPanel" class="controls flex flex-col flex-center justify-center">
-    <div>
-    <span class="confetti hidden fixed-center">
+    <span class="confetti hidden">
       <ConfettiExplosion
         v-if="confettiOn"
         :stageHeight="800"
-        style="position: relative; top: -200px; left: 40px"
+        style="position: relative; top: -500px; left: 475px"
       />
     </span>
+  <div id="controlPanel" class="controls flex flex-col flex-center justify-center">
+    <div>
     <div class="" id="resultsLabel">-.-.-.-.-</div>
       <div class="" id="timerLabel">
       {{this.t_elapsed.toFixed(3)}}
@@ -164,7 +164,7 @@ export default defineComponent({
 })
 </script>
 <style>
-.controls {width:100%;height:150px;background-color:orange}
+.controls {width:950px;height:150px;background-color:orange}
 .controlB {width: 100px; height:50px;width:200px }
 #timerLabel {font-weight: bold; font-size: 24px;position:relative;width:200px;left:70px}
 #resultsLabel {font-weight: bold; font-size: 24px;position:relative;width:200px;text-align:center;}

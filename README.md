@@ -4,4 +4,4 @@
 
 Simple Slot Machine (in progress)
 
-The reels are currently running against a clock, such that if your cpu + clock are not up-to-speed then the reels won't stop at the right places. Considering to implement a "snap-to" approach where rather than merely stopping after the computed (time) \* (d_theta/dt), it then calculates the rotation angle associated with that number and snaps-to that value.
+The reels are currently running against a clock, such that if your cpu + clock + rendering-speeds are not up-to-speed (author's own mobile phone!) then the reels won't stop at the right places. Considering to implement a "snap-to" approach where rather than merely stopping after the computed (time) \* (d_theta/dt), it then calculates the rotation angle associated with that number and snaps-to that value.

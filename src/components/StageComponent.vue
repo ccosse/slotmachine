@@ -21,7 +21,7 @@
 import { defineComponent, ref } from 'vue'
 import ReelComponent from 'components/ReelComponent.vue'
 /**
-  The StageComponent holds the holds a set of ReelComponents
+  The StageComponent holds a set of ReelComponents
 */
 
 export default defineComponent({
@@ -43,7 +43,7 @@ export default defineComponent({
 </script>
 <style>
 #stage {
-  width: 100%;
+  width: 950px;
   height: 700px;
   background-color: #bbddbb;
 }
@@ -51,7 +51,7 @@ export default defineComponent({
   position: absolute;
   top: 350px;
   background-color: red;
-  width:100%;
+  width:950px;
   height:1px;
 }
 </style>
