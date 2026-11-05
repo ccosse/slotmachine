@@ -1,0 +1,55 @@
+const test = require('node:test')
+const assert = require('node:assert/strict')
+const { createServer } = require('node:http')
+const { readFile } = require('node:fs/promises')
+const { resolve, extname } = require('node:path')
+const { chromium } = require('playwright')
+
+test('original five-reel play and reusable seven-reel preset', async t => {
+  const root = resolve(__dirname, '../dist/spa')
+  const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml' }
+  const server = createServer(async (req, res) => {
+    const path = resolve(root, '.' + new URL(req.url, 'http://localhost').pathname)
+    if (!path.startsWith(root + '/') && path !== root) { res.writeHead(403).end(); return }
+    try { const file = path === root ? resolve(root, 'index.html') : path; res.setHeader('Content-Type', types[extname(file)] || 'application/octet-stream'); res.end(await readFile(file)) } catch { res.writeHead(404).end() }
+  })
+  await new Promise(done => server.listen(0, '127.0.0.1', done))
+  t.after(() => server.close())
+  const browser = await chromium.launch({ executablePath: process.env.BROWSER_PATH || undefined, args: ['--no-sandbox'] })
+  t.after(() => browser.close())
+  const page = await browser.newPage({ viewport: { width: 1200, height: 1000 } })
+  const errors = []
+  page.on('pageerror', e => errors.push(e.message))
+  page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`) })
+  const url = `http://127.0.0.1:${server.address().port}/`
+  await page.goto(url)
+  await page.waitForSelector('.reel')
+  assert.equal(await page.locator('.reel').count(), 5)
+  assert.equal(await page.locator('.pane').count(), 100)
+  await page.getByRole('button', { name: 'Spin', exact: true }).click()
+  await page.waitForFunction(() => document.querySelectorAll('.reel.paused').length === 5)
+  assert.match(await page.locator('#resultsLabel').textContent(), /^\d+, \d+, \d+, \d+, \d+$/)
+  await page.goto(url + '#/?reels=7&preset=WELCOME&compact=1')
+  await page.waitForSelector('.compact .reel')
+  assert.equal(await page.locator('.reel').count(), 7)
+  assert.equal(await page.locator('.pane').count(), 140)
+  await page.waitForFunction(() => document.querySelectorAll('.q-img img').length === 140 && [...document.querySelectorAll('.reel .pane:first-child img')].every(e => e.src.startsWith('data:image/svg+xml,')))
+  const images = await page.locator('.q-img img').evaluateAll(es => es.map(e => e.src))
+  assert.equal(images.filter(src => src.startsWith('data:image/svg+xml,')).length, 7)
+  assert.deepEqual(images.filter(src => src.startsWith('data:')).map(src => decodeURIComponent(src).match(/>([A-Z])<\/text>/)[1]), [...'WELCOME'])
+  for (let i = 0; i < 2; i++) {
+    await page.getByRole('button', { name: 'Spin', exact: true }).click()
+    await page.waitForTimeout(400)
+    assert.notEqual(await page.locator('.reel').first().evaluate(e => getComputedStyle(e).transform), 'none')
+    await page.waitForFunction(() => document.querySelector('#resultsLabel').textContent === 'WELCOME')
+    assert.deepEqual(await page.locator('.q-img img').evaluateAll(es => es.map(e => e.src)), images)
+    const transforms = await page.locator('.reel').evaluateAll(es => es.map(e => new DOMMatrix(getComputedStyle(e).transform)))
+    assert.ok(transforms.every(m => Math.abs(m.m11 - 1) < 0.00001 && Math.abs(m.m13) < 0.00001))
+  }
+  await page.setViewportSize({ width: 375, height: 700 })
+  await page.waitForTimeout(150)
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+  const box = await page.locator('.compact').boundingBox()
+  assert.ok(box.width <= 375 && box.height < 400)
+  assert.deepEqual(errors, [])
+})

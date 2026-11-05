@@ -15,7 +15,7 @@
         style="position: relative; top: -200px; left: 40px"
       />
     </span>
-    <div class="" id="resultsLabel">-.-.-.-.-</div>
+    <div class="" id="resultsLabel" aria-live="polite">-.-.-.-.-</div>
       <div class="" id="timerLabel">
       {{this.t_elapsed.toFixed(3)}}
       </div>
@@ -37,11 +37,13 @@ export default defineComponent({
   components: {
     ConfettiExplosion
   },
-  props: ['ximgs', 't360', 'numpane'],
+  props: ['ximgs', 't360', 'numpane', 'preset'],
   setup(props){
     console.log(props)
     return {
       spinning: ref(false),
+      settling: ref(false),
+      timers: [],
       t_elapsed: ref(0),
       t0: Date.now(),
       interval: ref(null),
@@ -50,7 +52,7 @@ export default defineComponent({
       degPerSec: 360./parseFloat(props.t360),
       secPerTab: null,
       msPerTab: null,
-      startNumbers: [0, 0, 0, 0, 0],
+      startNumbers: Array(props.ximgs.length).fill(0),
       confettiOn: ref(false)
     }
   },
@@ -62,20 +64,26 @@ export default defineComponent({
     this.msPerTab = this.secPerTab * 1000.
     console.log('confettiOn', this.confettiOn)
   },
+  beforeUnmount () {
+    this.timers.forEach(clearTimeout)
+    cancelAnimationFrame(this.interval)
+    this.$el.parentElement.querySelectorAll('.reel').forEach(reel => reel.getAnimations().forEach(a => a.cancel()))
+  },
   methods:{
+    schedule (callback, delay) { this.timers.push(window.setTimeout(callback, delay)) },
     async explode () {
       console.log('EXPLODE!')
-      d3.select('.confetti').classed('hidden', false).classed('z-max', true)
+      d3.select(this.$el.parentElement).select('.confetti').classed('hidden', false).classed('z-max', true)
       this.confettiOn = true
       // await nextTick();
-      window.setTimeout(() => {
+      this.schedule(() => {
         this.confettiOn = false
-        d3.select('.confetti').classed('hidden', true)
+        d3.select(this.$el.parentElement).select('.confetti').classed('hidden', true)
         console.log('confettiOn', this.confettiOn)
       }, 5000)
     },
     tick(){
-      d3.select("#timerLabel").html(((Date.now() - this.t0)/1000.).toFixed(3))
+      d3.select(this.$el.parentElement).select("#timerLabel").html(((Date.now() - this.t0)/1000.).toFixed(3))
       if (this.spinning == true) {
         cancelAnimationFrame(this.interval);
         this.interval = requestAnimationFrame(() => {
@@ -84,10 +92,12 @@ export default defineComponent({
       }
     },
     spin(){
-      d3.select("#resultsLabel").html('-.-.-.-.-')
-      d3.selectAll(".reel").classed("spinning", false)
-      // d3.selectAll(".reel").classed("paused", false) // this resets to initial zero rotation
-      window.setTimeout(() => {
+      if (this.spinning || this.settling) return
+      if (this.preset && this.preset.length === this.ximgs.length) return this.spinPreset()
+      d3.select(this.$el.parentElement).select("#resultsLabel").html('-.-.-.-.-')
+      d3.select(this.$el.parentElement).selectAll(".reel").classed("spinning", false)
+      // d3.select(this.$el.parentElement).selectAll(".reel").classed("paused", false) // this resets to initial zero rotation
+      this.schedule(() => {
         console.log('Spin')
         this.t0 = Date.now()
         this.spinning = true
@@ -96,9 +106,9 @@ export default defineComponent({
         // const dtRun = (3000 + parseInt(Math.random()*3) * 1000 + this.msPerTab)
         const dtRun = ((this.msPerTab*10) + parseInt(Math.random()*10) * (this.msPerTab) + this.msPerTab) //
         console.log('dtRun', dtRun)
-        d3.selectAll(".reel").classed("spinning", this.spinning)
+        d3.select(this.$el.parentElement).selectAll(".reel").classed("spinning", this.spinning)
         this.tick()
-        window.setTimeout(() => this.stop(), dtRun)
+        this.schedule(() => this.stop(), dtRun)
       }, 100)
     },
     stop(){
@@ -108,57 +118,38 @@ export default defineComponent({
       this.paused = true
       // reels stop from L to R by adding sufficient int to allow for max previous dt
       let HTML = ''
-      window.setTimeout(() => {
-        d3.select("#reel0").classed("spinning", this.spinning)
-        d3.select("#reel0").classed("paused", this.paused)
-        let tileNo = this.startNumbers[0] + parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 20
-        this.startNumbers[0] = tileNo
-        console.log(this.ximgs[0][tileNo])
-        HTML += tileNo + ", "
-        d3.select("#resultsLabel").html(HTML)
-      },0*this.msPerTab)
-      window.setTimeout(() => {
-        d3.select("#reel1").classed("spinning", this.spinning)
-        d3.select("#reel1").classed("paused", this.paused)
-        let tileNo = this.startNumbers[1] + parseInt((Date.now() - this.t0)/this.msPerTab)
-        this.startNumbers[1] = tileNo
-        while (tileNo > 19) tileNo -= 20
-        console.log(this.ximgs[1][tileNo])
-        HTML += tileNo + ", "
-        d3.select("#resultsLabel").html(HTML)
-      },(1 + parseInt(Math.random() * 5))*this.msPerTab)
-      window.setTimeout(() => {
-        d3.select("#reel2").classed("spinning", this.spinning)
-        d3.select("#reel2").classed("paused", this.paused)
-        let tileNo = this.startNumbers[2] + parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 20
-        this.startNumbers[2] = tileNo
-        console.log(this.ximgs[2][tileNo])
-        HTML += tileNo + ", "
-        d3.select("#resultsLabel").html(HTML)
-      },(5 + parseInt(Math.random() * 5))*this.msPerTab)
-      window.setTimeout(() => {
-        d3.select("#reel3").classed("spinning", this.spinning)
-        d3.select("#reel3").classed("paused", this.paused)
-        let tileNo = this.startNumbers[3] + parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 20
-        this.startNumbers[3] = tileNo
-        console.log(this.ximgs[3][tileNo])
-        HTML += tileNo + ", "
-        d3.select("#resultsLabel").html(HTML)
-      },(9 + parseInt(Math.random()) * 5)*this.msPerTab)
-      window.setTimeout(() => {
-        d3.select("#reel4").classed("spinning", this.spinning)
-        d3.select("#reel4").classed("paused", this.paused)
-        let tileNo = this.startNumbers[4]+ parseInt((Date.now() - this.t0)/this.msPerTab)
-        while (tileNo > 19) tileNo -= 20
-        console.log(this.ximgs[4][tileNo])
-        this.startNumbers[4] = tileNo
-        HTML += tileNo
-        d3.select("#resultsLabel").html(HTML)
-        this.explode()
-      },(13 + parseInt(Math.random() * 5))*this.msPerTab)
+      this.settling = true
+      this.ximgs.forEach((images, i) => {
+        const delay = i === 0 ? 0 : (1 + (i-1)*4 + (i === 3 ? 0 : Math.floor(Math.random()*5)))*this.msPerTab
+        this.schedule(() => {
+          d3.select(this.$el.parentElement).select('#reel'+i).classed('spinning', false).classed('paused', true)
+          const tileNo = (this.startNumbers[i] + Math.floor((Date.now()-this.t0)/this.msPerTab)) % this.numpane
+          this.startNumbers[i] = tileNo
+          HTML += tileNo + (i === this.ximgs.length-1 ? '' : ', ')
+          d3.select(this.$el.parentElement).select('#resultsLabel').text(HTML)
+          if (i === this.ximgs.length-1) { this.settling = false; this.explode() }
+        }, delay)
+      })
+    },
+    async spinPreset () {
+      this.spinning = true
+      this.t0 = Date.now()
+      this.tick()
+      const root = this.$el.parentElement
+      root.querySelector('#resultsLabel').textContent = Array(this.ximgs.length).fill('-').join('.')
+      const reels = [...root.querySelectorAll('.reel')]
+      try { await Promise.all(reels.map((reel, i) => {
+        reel.getAnimations().forEach(animation => animation.cancel())
+        const animation = reel.animate([
+          { transform: 'rotateY(0deg)' },
+          { transform: 'rotateY(-1080deg)' }
+        ], { duration: 3000 + i*300, easing: 'cubic-bezier(.15,.65,.3,1)', fill: 'forwards' })
+        return animation.finished
+      })) } catch { return }
+      this.spinning = false
+      cancelAnimationFrame(this.interval)
+      root.querySelector('#resultsLabel').textContent = this.preset
+      this.explode()
     }
   }
 })

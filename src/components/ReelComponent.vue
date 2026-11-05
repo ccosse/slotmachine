@@ -9,14 +9,14 @@
   <div v-bind:id="this.reelcontainerid" class="reel_container">
     <div v-bind:id="this.reelid" class="reel">
       <div v-for="(val,idx) in this.numpanes" :key="idx" class="pane">
-        <TileComponent :imgUrl="this.tileImgs[idx]" :w_pane="this.w_pane" :h_pane="this.h_pane" :idx="idx"/>
+        <TileComponent :imgUrl="this.ximgs[idx]" :w_pane="this.w_pane" :h_pane="this.h_pane" :idx="idx"/>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { defineComponent, ref } from 'vue'
-import TileComponent from 'components/TileComponent.vue'
+import { defineComponent } from 'vue'
+import TileComponent from './TileComponent.vue'
 /**
   The ReelComponent holds contains npane TileComonents arranged in a carousel 
   by CSS3D properties.
@@ -24,15 +24,8 @@ import TileComponent from 'components/TileComponent.vue'
 export default defineComponent({
   name: 'ReelComponent',
   components: { TileComponent },
-  props: [ 'ximgs', 'reelIdx', 'reelid', 'reelcontainerid', 't360', 'numpanes', 'w_pane', 'h_pane' ],
-  setup(props){
-    return {
-      tileImgs: ref([])
-    }
-  },
-  mounted(){
-    this.tileImgs = this.ximgs
-  }
+  props: [ 'ximgs', 'reelIdx', 'reelid', 'reelcontainerid', 't360', 'numpanes', 'w_pane', 'h_pane' ]
+
 })
 </script>
 <style>
