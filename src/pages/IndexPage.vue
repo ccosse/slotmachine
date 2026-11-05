@@ -64,7 +64,7 @@ export default defineComponent({
         const shift = (offset * i) % reelImgs.length
         const images = reelImgs.slice(shift).concat(reelImgs.slice(0, shift))
         if (this.preset.length === this.reelCount) {
-          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="white"/><text x="50" y="75" text-anchor="middle" font-family="URW Chancery L, Z003, Apple Chancery, Brush Script MT, cursive" font-style="italic" font-weight="bold" font-size="76" fill="#009500" stroke="#f1ff00" stroke-width="4" paint-order="stroke fill" stroke-linejoin="round">${this.preset[i]}</text></svg>`
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#777777"/><text x="50" y="76" text-anchor="middle" font-family="Arial Rounded MT Bold, DejaVu Sans, Verdana, sans-serif" font-weight="900" font-size="78" fill="#009500" stroke="#f1ff00" stroke-width="4" paint-order="stroke fill" stroke-linejoin="round">${this.preset[i]}</text></svg>`
           images[0] = 'data:image/svg+xml,' + encodeURIComponent(svg)
         }
         return images
@@ -78,9 +78,25 @@ html, body { height: 100%; }
 .slot-machine { position: relative; }
 .slot-machine.compact { height: calc(190px * var(--machine-scale, 1)); width: 100%; margin: auto; overflow: visible; }
 .compact .machine-canvas { transform-origin: top left; position: relative; height: 190px; border-radius: 20px; overflow: hidden; background: #303030; }
-.compact #stage { position: absolute; top: 20px; left: 0; width: 100%; height: 150px; overflow: hidden; background: transparent; }
+.compact #stage { position: absolute; top: 20px; left: 0; width: 100%; height: 150px; overflow: hidden; background: #777; border-radius: 14px; }
+/* A foreground bezel masks the square edges and softens the column divisions. */
+.compact #stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 9px #303030;
+  background: repeating-linear-gradient(to right,
+    transparent 0,
+    transparent calc(100% / 8 - 1px),
+    rgba(48, 48, 48, .14) calc(100% / 8 - 1px),
+    rgba(48, 48, 48, .14) calc(100% / 8));
+}
 .compact .reel_container { top: 70px; border: none; }
-.compact .reel .pane { border: none !important; }
+.compact .reel .pane { border: none !important; background: #777; backface-visibility: hidden; }
+.compact .reel .pane .q-img { opacity: 1 !important; }
 .compact #h2 { display: none; }
 .compact .controls { position: absolute; inset: 0; height: 190px; background: transparent; z-index: 8; display: block; pointer-events: none; }
 .compact .controls > div { position: static; }
