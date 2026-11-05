@@ -24,10 +24,25 @@ const colors = {
   "chest": "#f7ba42",
   "seven": "#ff4b60"
 };
+// Hand-authored secondary neon strokes keep the silhouettes readable while adding
+// the two-color, illustrated neon-sign treatment in the approved reference.
+// Transparent gaps remain transparent; these are not square backgrounds.
+const accents = {
+  cherries: '<g fill="none" stroke="#4cff64" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M94 59 Q72 82 65 103 M100 59 Q114 84 119 105"/><path d="M95 54 Q65 28 38 65 Q65 86 95 54 M104 56 Q137 34 161 74 Q128 92 104 56"/></g>',
+  pineapple: '<g fill="none" stroke="#35ff72" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M96 83 Q76 45 51 36 M96 80 Q93 39 97 15 M97 81 Q121 43 145 37 M95 83 Q68 60 47 60 M101 82 Q126 61 145 61"/></g><g stroke="#ff9f2a" stroke-width="2.4" opacity=".95"><path d="M68 109l50 50 M115 108l-48 49 M61 134l41 37 M125 128l-35 43"/></g>',
+  banana: '<g fill="none" stroke="#ff9b28" stroke-width="5" stroke-linecap="round"><path d="M36 113 Q78 126 118 69 M45 147 Q98 176 150 91 M134 39 L151 35"/></g>',
+  lemon: '<g fill="none" stroke="#51ff61" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M91 61 Q112 30 153 44 Q133 71 98 66 M87 70 L76 44"/></g>',
+  gem: '<g fill="none" stroke="#ae6bff" stroke-width="4" stroke-linejoin="round"><path d="M20 79 H174 M54 40 L96 158 L140 40 M54 40 L96 79 L140 40"/></g>',
+  bar: '<g fill="none" stroke="#fff36a" stroke-width="3.6" stroke-linejoin="round"><path d="M45 91v32h15q11-6 0-16 10-14-1-16z M85 125l12-35 12 35 M89 116h17 M129 125V91h15q15 8 0 18l10 16"/></g>',
+  bell: '<g fill="none" stroke="#fff16b" stroke-width="4" stroke-linecap="round"><path d="M70 83 Q75 53 98 54 M47 139 Q94 124 150 139 M90 165h16"/></g>',
+  dollar: '<g fill="none" stroke="#f7e767" stroke-width="4" stroke-linecap="round"><path d="M96 23v153 M66 53 Q92 34 123 60 M60 143 Q96 169 131 140"/></g>',
+  chest: '<g fill="none" stroke="#fff472" stroke-width="3.5" stroke-linejoin="round"><path d="M46 69h101 M22 103h154 M48 132h98 M86 40v48 M107 41v47 M96 98v33"/></g>',
+  seven: '<g fill="none" stroke="#ffe45b" stroke-width="4.2" stroke-linejoin="round"><path d="M44 57 Q66 42 92 54 Q125 67 150 45 M130 72 Q86 114 78 148"/></g>'
+};
 const makeSvg = (key, neon) => {
   const fill = neon ? colors[key] : '#ffffff';
   const filter = neon ? '<defs><filter id="glow" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>' : '';
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">'+filter+'<path fill="'+fill+'" fill-rule="evenodd"'+(neon?' filter="url(#glow)"':'')+' d="'+paths[key]+'"/></svg>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">'+filter+'<g'+(neon?' filter="url(#glow)"':'')+'><path fill="'+fill+'" fill-rule="evenodd" d="'+paths[key]+'"/>'+(neon?accents[key]:'')+'</g></svg>';
 };
 export const neonSymbols = Object.freeze(Object.fromEntries(Object.keys(paths).map(key => [key, 'data:image/svg+xml,'+encodeURIComponent(makeSvg(key, true))])));
 export const whiteSymbols = Object.freeze(Object.fromEntries(Object.keys(paths).map(key => [key, 'data:image/svg+xml,'+encodeURIComponent(makeSvg(key, false))])));
