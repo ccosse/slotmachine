@@ -18,31 +18,11 @@
 import { defineComponent } from 'vue'
 import StageComponent from '../components/StageComponent.vue'
 import ControlsComponent from '../components/ControlsComponent.vue'
+import { neonSymbols, reelSymbolOrder } from '../assets/neonSymbols.js'
 /**
   The IndexPage holds the Stage and Controls
 */
-const reelImgs = [
-  new URL('../assets/cherries.png', import.meta.url).href,
-  new URL('../assets/pineapple.png', import.meta.url).href,
-  new URL('../assets/lemon.png', import.meta.url).href,
-  new URL('../assets/seven.png', import.meta.url).href,
-  new URL('../assets/gem.png', import.meta.url).href,
-  new URL('../assets/seven2.png', import.meta.url).href,
-  new URL('../assets/bar.png', import.meta.url).href,
-  new URL('../assets/bell.png', import.meta.url).href,
-  new URL('../assets/seven3.png', import.meta.url).href,
-  new URL('../assets/dollar.png', import.meta.url).href,
-  new URL('../assets/cherries.png', import.meta.url).href,
-  new URL('../assets/pineapple.png', import.meta.url).href,
-  new URL('../assets/lemon.png', import.meta.url).href,
-  new URL('../assets/seven.png', import.meta.url).href,
-  new URL('../assets/gem.png', import.meta.url).href,
-  new URL('../assets/seven2.png', import.meta.url).href,
-  new URL('../assets/bar.png', import.meta.url).href,
-  new URL('../assets/bell.png', import.meta.url).href,
-  new URL('../assets/seven3.png', import.meta.url).href,
-  new URL('../assets/chest.png', import.meta.url).href
-]
+const reelImgs = reelSymbolOrder.map(name => neonSymbols[name])
 const offset = 3
 export default defineComponent({
   name: 'IndexPage',
@@ -64,7 +44,7 @@ export default defineComponent({
         const shift = (offset * i) % reelImgs.length
         const images = reelImgs.slice(shift).concat(reelImgs.slice(0, shift))
         if (this.preset.length === this.reelCount) {
-          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#777777"/><text x="50" y="76" text-anchor="middle" font-family="Arial Rounded MT Bold, DejaVu Sans, Verdana, sans-serif" font-weight="900" font-size="78" fill="#009500" stroke="#f1ff00" stroke-width="4" paint-order="stroke fill" stroke-linejoin="round">${this.preset[i]}</text></svg>`
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><text x="50" y="76" text-anchor="middle" font-family="Arial Rounded MT Bold, DejaVu Sans, Verdana, sans-serif" font-weight="900" font-size="78" fill="#009500" stroke="#f1ff00" stroke-width="4" paint-order="stroke fill" stroke-linejoin="round">${this.preset[i]}</text></svg>`
           images[0] = 'data:image/svg+xml,' + encodeURIComponent(svg)
         }
         return images
@@ -78,7 +58,7 @@ html, body { height: 100%; }
 .slot-machine { position: relative; }
 .slot-machine.compact { height: calc(190px * var(--machine-scale, 1)); width: 100%; margin: auto; overflow: visible; }
 .compact .machine-canvas { transform-origin: top left; position: relative; height: 190px; border-radius: 20px; overflow: hidden; background: #303030; }
-.compact #stage { position: absolute; top: 20px; left: 0; width: 100%; height: 150px; overflow: hidden; background: #777; border-radius: 14px; }
+.compact #stage { position: absolute; top: 20px; left: 0; width: 100%; height: 150px; overflow: hidden; background: #303030; border-radius: 14px; }
 /* A foreground bezel masks the square edges and softens the column divisions. */
 .compact #stage::after {
   content: '';
@@ -95,7 +75,7 @@ html, body { height: 100%; }
     rgba(48, 48, 48, .14) calc(100% / 8));
 }
 .compact .reel_container { top: 70px; border: none; }
-.compact .reel .pane { border: none !important; background: #777; backface-visibility: hidden; }
+.compact .reel .pane { border: none !important; background: transparent; backface-visibility: hidden; }
 .compact .reel .pane .q-img { opacity: 1 !important; }
 .compact #h2 { display: none; }
 .compact .controls { position: absolute; inset: 0; height: 190px; background: transparent; z-index: 8; display: block; pointer-events: none; }
