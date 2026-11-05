@@ -44,7 +44,7 @@ export default defineComponent({
         const shift = (offset * i) % reelImgs.length
         const images = reelImgs.slice(shift).concat(reelImgs.slice(0, shift))
         if (this.preset.length === this.reelCount) {
-          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><text x="50" y="76" text-anchor="middle" font-family="Arial Rounded MT Bold, DejaVu Sans, Verdana, sans-serif" font-weight="900" font-size="78" fill="#009500" stroke="#f1ff00" stroke-width="4" paint-order="stroke fill" stroke-linejoin="round">${this.preset[i]}</text></svg>`
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.7" result="halo"/><feMerge><feMergeNode in="halo"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><text x="49" y="76" text-anchor="middle" font-family="Georgia, URW Bookman, Times New Roman, serif" font-style="italic" font-weight="900" font-size="76" fill="#009500" stroke="#f1ff00" stroke-width="4.5" paint-order="stroke fill" stroke-linejoin="round" filter="url(#neonGlow)">${this.preset[i]}</text></svg>`
           images[0] = 'data:image/svg+xml,' + encodeURIComponent(svg)
         }
         return images
