@@ -83,6 +83,6 @@ html, body { height: 100%; }
 .compact #h2 { top: 75px; background-color: #bda04e; opacity: .55; }
 .compact .controls { position: absolute; inset: 0; height: 150px; background: transparent; z-index: 8; display: block; pointer-events: none; }
 .compact .controls > div { position: static; }
-.compact .controlB { position: absolute; right: 12px; bottom: 9px; width: 88px; height: 32px; min-height: 32px; font-size: 13px; opacity: .86; pointer-events: auto; }
+.compact .controlB { position: absolute; right: calc(12px / var(--machine-scale, 1)); bottom: calc(9px / var(--machine-scale, 1)); width: calc(88px / var(--machine-scale, 1)); height: calc(32px / var(--machine-scale, 1)); min-height: calc(32px / var(--machine-scale, 1)); font-size: calc(13px / var(--machine-scale, 1)); opacity: .86; pointer-events: auto; }
 .compact #resultsLabel, .compact #timerLabel, .compact .pane .text-h6 { display: none; }
 </style>
