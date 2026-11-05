@@ -64,7 +64,7 @@ export default defineComponent({
         const shift = (offset * i) % reelImgs.length
         const images = reelImgs.slice(shift).concat(reelImgs.slice(0, shift))
         if (this.preset.length === this.reelCount) {
-          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#303030"/><text x="50" y="75" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="bold" font-size="76" fill="#f4d955" stroke="#3e6c23" stroke-width="1.5" paint-order="stroke">${this.preset[i]}</text></svg>`
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#303030"/><text x="50" y="75" text-anchor="middle" font-family="Trebuchet MS, Arial Rounded MT Bold, Verdana, sans-serif" font-style="italic" font-weight="bold" font-size="74" fill="#18a84a" stroke="#f4db3f" stroke-width="4" paint-order="stroke fill" stroke-linejoin="round">${this.preset[i]}</text></svg>`
           images[0] = 'data:image/svg+xml,' + encodeURIComponent(svg)
         }
         return images
@@ -76,12 +76,13 @@ export default defineComponent({
 <style>
 html, body { height: 100%; }
 .slot-machine { position: relative; }
-.slot-machine.compact { height: calc(150px * var(--machine-scale, 1)); width: 100%; margin: auto; overflow: visible; }
-.compact .machine-canvas { transform-origin: top left; position: relative; height: 150px; }
-.compact #stage { height: 150px; overflow: hidden; background-color: #303030; }
-.compact .reel_container { top: 70px; }
-.compact #h2 { top: 75px; background-color: #bda04e; opacity: .55; }
-.compact .controls { position: absolute; inset: 0; height: 150px; background: transparent; z-index: 8; display: block; pointer-events: none; }
+.slot-machine.compact { height: calc(190px * var(--machine-scale, 1)); width: 100%; margin: auto; overflow: visible; }
+.compact .machine-canvas { transform-origin: top left; position: relative; height: 190px; border-radius: 20px; overflow: hidden; background: #303030; }
+.compact #stage { position: absolute; top: 20px; left: 0; width: 100%; height: 150px; overflow: hidden; background: transparent; }
+.compact .reel_container { top: 70px; border: none; }
+.compact .reel .pane { border: none !important; }
+.compact #h2 { display: none; }
+.compact .controls { position: absolute; inset: 0; height: 190px; background: transparent; z-index: 8; display: block; pointer-events: none; }
 .compact .controls > div { position: static; }
 .compact .controlB { position: absolute; right: calc(12px / var(--machine-scale, 1)); bottom: calc(9px / var(--machine-scale, 1)); width: calc(88px / var(--machine-scale, 1)); height: calc(32px / var(--machine-scale, 1)); min-height: calc(32px / var(--machine-scale, 1)); font-size: calc(13px / var(--machine-scale, 1)); opacity: .86; pointer-events: auto; }
 .compact #resultsLabel, .compact #timerLabel, .compact .pane .text-h6 { display: none; }
