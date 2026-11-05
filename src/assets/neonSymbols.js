@@ -39,10 +39,24 @@ const accents = {
   chest: '<g fill="none" stroke="#fff472" stroke-width="3.5" stroke-linejoin="round"><path d="M46 69h101 M22 103h154 M48 132h98 M86 40v48 M107 41v47 M96 98v33"/></g>',
   seven: '<g fill="none" stroke="#ffe45b" stroke-width="4.2" stroke-linejoin="round"><path d="M44 57 Q66 42 92 54 Q125 67 150 45 M130 72 Q86 114 78 148"/></g>'
 };
+// Slightly off-axis highlights and small hand-drawn curves soften the original
+// symmetric icon geometry without changing their recognizable silhouettes.
+const flourishes = {
+  cherries: '<g fill="none" stroke="#ffd0df" stroke-width="2.5" stroke-linecap="round"><path d="M51 123 Q45 134 55 143 M119 121 Q109 132 117 140"/></g>',
+  pineapple: '<g fill="none" stroke="#ffb54d" stroke-width="3.2" stroke-linecap="round"><path d="M61 109 Q80 115 85 129 M115 131 Q122 139 117 150 M79 157 Q91 168 105 158"/></g>',
+  banana: '<g fill="none" stroke="#fff6a5" stroke-width="3" stroke-linecap="round"><path d="M51 145 Q69 155 94 143 M126 87 Q133 77 137 65"/></g>',
+  lemon: '<g fill="none" stroke="#fffabb" stroke-width="2.8" stroke-linecap="round"><path d="M56 121 Q70 147 91 151 M102 53 Q129 43 141 47"/></g>',
+  gem: '<g fill="none" stroke="#f3b6ff" stroke-width="2.5" stroke-linecap="round"><path d="M31 77 Q48 64 56 48 M109 145 Q122 131 129 114"/></g>',
+  bar: '<g fill="none" stroke="#ffe99b" stroke-width="2.5" stroke-linecap="round"><path d="M20 72q13-9 24-6 M151 139q13-2 19-12"/></g>',
+  bell: '<g fill="none" stroke="#ffd6a5" stroke-width="2.5" stroke-linecap="round"><path d="M56 112q-4 12-13 19 M110 58q19 12 21 29"/></g>',
+  dollar: '<g fill="none" stroke="#ddffab" stroke-width="2.5" stroke-linecap="round"><path d="M69 51q13-10 27-9 M122 146q-11 11-25 11"/></g>',
+  chest: '<g fill="none" stroke="#ffc66e" stroke-width="3" stroke-linecap="round"><path d="M30 69q8-18 22-24 M152 50q11 15 12 28 M53 150q16 7 33 2"/></g>',
+  seven: '<g fill="none" stroke="#fff18d" stroke-width="3" stroke-linecap="round"><path d="M48 66q15-13 31-12 M120 91q-13 17-21 39"/></g>'
+};
 const makeSvg = (key, neon) => {
   const fill = neon ? colors[key] : '#ffffff';
   const filter = neon ? '<defs><filter id="glow" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>' : '';
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">'+filter+'<g'+(neon?' filter="url(#glow)"':'')+'><path fill="'+fill+'" fill-rule="evenodd" d="'+paths[key]+'"/>'+(neon?accents[key]:'')+'</g></svg>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">'+filter+'<g'+(neon?' filter="url(#glow)"':'')+'><path fill="'+fill+'" fill-rule="evenodd" d="'+paths[key]+'"/>'+(neon?accents[key]+(flourishes[key] || ''):'')+'</g></svg>';
 };
 export const neonSymbols = Object.freeze(Object.fromEntries(Object.keys(paths).map(key => [key, 'data:image/svg+xml,'+encodeURIComponent(makeSvg(key, true))])));
 export const whiteSymbols = Object.freeze(Object.fromEntries(Object.keys(paths).map(key => [key, 'data:image/svg+xml,'+encodeURIComponent(makeSvg(key, false))])));
