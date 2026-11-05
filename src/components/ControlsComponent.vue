@@ -143,8 +143,8 @@ export default defineComponent({
         reel.getAnimations().forEach(animation => animation.cancel())
         const animation = reel.animate([
           { transform: 'rotateY(0deg)' },
-          { transform: 'rotateY(-1080deg)' }
-        ], { duration: 3000 + i*300, easing: 'cubic-bezier(.15,.65,.3,1)', fill: 'forwards' })
+          { transform: 'rotateY(-720deg)' }
+        ], { duration: 7600 + i*350, easing: 'cubic-bezier(.38,.12,.32,1)', fill: 'forwards' })
         return animation.finished
       })) } catch { return }
       this.spinning = false
