@@ -37,7 +37,7 @@ export default defineComponent({
   components: {
     ConfettiExplosion
   },
-  props: ['ximgs', 't360', 'numpane', 'preset'],
+  props: ['ximgs', 't360', 'numpane', 'preset', 'autoSpin'],
   setup(props){
     console.log(props)
     return {
@@ -63,6 +63,7 @@ export default defineComponent({
     console.log('secPerTab', this.secPerTab)
     this.msPerTab = this.secPerTab * 1000.
     console.log('confettiOn', this.confettiOn)
+    if (this.autoSpin) this.$nextTick(() => this.schedule(() => this.spin(), 250))
   },
   beforeUnmount () {
     this.timers.forEach(clearTimeout)
