@@ -7,11 +7,7 @@
 */
 <template>
   <div id="stage" class="stage">
-    <ReelComponent :ximgs = "this.ximgs[0]" :reelIdx="0" :reelid="'reel0'" :reelcontainerid="'reelcontainer0'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :ximgs = "this.ximgs[1]" :reelIdx="1" :reelid="'reel1'" :reelcontainerid="'reelcontainer1'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :ximgs = "this.ximgs[2]" :reelIdx="2" :reelid="'reel2'" :reelcontainerid="'reelcontainer2'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :ximgs = "this.ximgs[3]" :reelIdx="3" :reelid="'reel3'" :reelcontainerid="'reelcontainer3'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
-    <ReelComponent :ximgs = "this.ximgs[4]" :reelIdx="4" :reelid="'reel4'" :reelcontainerid="'reelcontainer4'" :numpanes="20" :t360="this.t360" :w_pane="'100px'" :h_pane="'100px'"/>
+    <ReelComponent v-for="(images, i) in ximgs" :key="i" :ximgs="images" :reelIdx="i" :reelid="'reel'+i" :reelcontainerid="'reelcontainer'+i" :numpanes="20" :t360="t360" :w_pane="'100px'" :h_pane="'100px'" :style="{ left: `calc(${i+1}*(100% - 20px) / ${ximgs.length+1})` }"/>
     <!--
     -->
     <hline id="h2"/>
@@ -19,7 +15,7 @@
 </template>
 <script>
 import { defineComponent, ref } from 'vue'
-import ReelComponent from 'components/ReelComponent.vue'
+import ReelComponent from './ReelComponent.vue'
 /**
   The StageComponent holds a set of ReelComponents
 */
